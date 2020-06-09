@@ -5,7 +5,7 @@ from .models import Todo
 
 
 def index(request):
-    item_list = Todo.objects.order_by("-date")
+    item_list = Todo.objects.order_by("id")
 
     if request.method == "POST":
         form = TodoForm(request.POST)
@@ -18,7 +18,7 @@ def index(request):
         "list": item_list,
         "title": "TODO LIST",
     }
-    return render(request, 'todo/index.html', page)
+    return render(request, 'todo/filmyindex.html', page)
 
 
 def remove(request, item_id):

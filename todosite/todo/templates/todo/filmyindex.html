@@ -1,0 +1,185 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Baza filmów</title>
+	</head>
+	<style>
+		body {
+		background-color: #cacaf6;
+		font-family: Arial;
+		height:2000px;
+		}
+		.container{
+		with: 100%;
+		height:60%;
+		background-color: #b4b4b4;
+		margin-left:100px;
+		margin-right: 100px;
+		border: solid; -moz-border-radius: 15px;
+		}
+		.formontop{
+		width:100%;
+		height:60%;
+		margin-bottom: -25px;
+		margin-top:-55px;
+		color:white;
+		text-align: center;
+		margin-right:35px;
+		font-family: cursive;
+		background-color: #1db8fd;
+		background: radial-gradient(circle, rgba(251,63,63,1) 0%, rgba(70,168,252,1) 100%);
+		}
+		.napisgora{
+		text-align: center;
+		color:white;
+		font-size:xx-large;
+		font-family: cursive;
+		height:15%;
+		color: white; text-shadow: black 0.1em 0.1em 0.2em;
+		background-color:#046bc3;
+		}
+		.przycisk
+		{
+		background-color: #046bc3;
+		color:white;
+		font-family: cursive;
+		font-size:20px;
+		border-top-right-radius: 10px;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		}
+		.films{
+		height:15%;
+		background-color:#5e7ef9;
+		width:100%;
+		text-align:center;
+		color:white;
+		font-family:cursive;
+		border-top-right-radius: 10px;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		}
+	</style>
+	<body class="container-fluid">
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-info">
+			<strong>{{message}}</strong>
+		</div>
+		{% endfor %}
+		{% endif %}
+		<center class="row">
+			<h1><i>Serdecznie witamy w bazie filmów. Wypełnij poniższy formularz aby dodać film!</i></h1>
+			<hr />
+		</center>
+		<div class="row">
+			<div class="col-md-8">
+				{% for i in list %}
+				<div class="card">
+					<center><b>{{i.tytul}}</b></center>
+					<hr/>
+					{{i.producent}}
+					<hr/>
+					{{i.wydawca}}
+					<hr/>
+					{{i.tytul}}
+					<hr/>
+					{{i.aktorzy}}
+					<hr/>
+					{{i.scenarzysta}}
+					<hr/>
+					{{i.kategoria}}
+					<hr/>
+					{{i.ocena}}
+					<hr/>
+					{{i.status}}
+					<br />
+					<br />
+					<form action="/del/{{i.id}}" method="POST" style=" padding-right:
+						4%; padding-bottom: 3%;">
+						{% csrf_token %}
+						<button value="remove" type="submit" class="btn btn-primary"
+							style="float: right;"><span class="glyphicon glyphicontrash"></span> &nbsp; remove</button>
+					</form>
+				</div>
+				{% endfor%}
+			</div>
+			<div class="col-md-1"> </div>
+			<div class="col-md-3" >
+				<div class="submit_form">
+					<form method="POST">
+						{% csrf_token %}
+						{{forms|crispy}}
+						<center>
+							<input type="submit" class="btn btn-default" value="submit" />
+						</center>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+<!--	<body>-->
+<!--		<div class="container">-->
+<!--			<div class="napisgora"> Serdecznie witamy w bazie filmów. Wypełnij poniższy formularz aby dodać film!</div>-->
+<!--			<div class="formontop">-->
+<!--				<br />-->
+<!--				<h2> Wypełnij formularz: </h2>-->
+<!--				<form action="*">-->
+<!--					Producent: <br />-->
+<!--					<center><b>{{producent}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Wydawca: <br />-->
+<!--					<center><b>{{wydawca}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Tytuł: <br />-->
+<!--					<center><b>{{tytul}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Aktorzy:<br />-->
+<!--					<center><b>{{aktorzy}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Scenarzysta:<br />-->
+<!--					<center><b>{{scenarzysta}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Kategoria:<br />-->
+<!--					<center><b>{{kategoria}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Ocena: <br />-->
+<!--					<center><b>{{ocena}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br>-->
+<!--					Status: <br />-->
+<!--					<center><b>{{status}}</b></center>-->
+<!--					<textarea name="texarea"></textarea>-->
+<!--					<br><div class="col-md-3" >-->
+<!--				<div class="submit_form">-->
+<!--					<form method="POST">-->
+<!--						{% csrf_token %}-->
+<!--						{{forms|crispy}}-->
+<!--						<center>-->
+<!--							<input type="submit" class="btn btn-default" value="submit" />-->
+<!--						</center>-->
+<!--					</form>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--				</form>-->
+<!--			</div>-->
+<!--			<div class="films">-->
+<!--				<br>-->
+<!--				<h4>FILM 1</h4>-->
+<!--				<br>-->
+<!--				<button class="przycisk" type="submit">Usuń</button>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		</div>-->
+<!--	</body>-->
+</html>
